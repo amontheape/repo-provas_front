@@ -1,4 +1,5 @@
-import reactDom from 'react-dom'
+import ReactDom from 'react-dom'
 import App from './App'
+import './styles/reset.css'
 
-reactDom.render(<App />, document.querySelector('.root'))
+ReactDom.render(<App />, document.querySelector('.root'))

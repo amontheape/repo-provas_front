@@ -4,7 +4,8 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<>Hello World</>} />
+        <Route path = '/' element = {<>logIn PlaceHolder</>} />
+        <Route path = '/home' element = {<>Home PlaceHolder</>} />
       </Routes>
     </Router>
   )
