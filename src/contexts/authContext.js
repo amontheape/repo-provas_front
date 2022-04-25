@@ -1,6 +1,7 @@
 import React, { createContext, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import useLocalStorage from '../hooks/useLocalStorage'
+import { logout } from '../services/index.js'
 
 export const AuthContext = createContext()
 
@@ -13,13 +14,17 @@ export function AuthProvider( { children } ) {
     if ( user ) {
       location.pathname === '/' && navigate('/home')
     } else {
-      navigate('/')
+      navigate('/login')
     }
   }, []) //eslint-disable-line
 
-  function logOut() {
-    setUser(null)
-    navigate('/')
+  function handleLogout() {
+    logout( user.token )
+      .then( () => {
+        setUser(null)
+        navigate('/login')
+      })
+      .catch( err => console.log(err))
   }
 
   return (
@@ -27,7 +32,9 @@ export function AuthProvider( { children } ) {
       value = {{
         user,
         setUser,
-        logOut
+        navigate,
+        location,
+        handleLogout
       }}
     >
       { children }
