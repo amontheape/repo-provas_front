@@ -1,5 +1,5 @@
 import useAuth from "../../hooks/useAuth"
-import { MdExitToApp } from 'react-icons/md'
+import { MdExitToApp, MdHeight } from 'react-icons/md'
 import logo from '../../assets/images/logo.svg'
 
 import { StyledHeader, Logo } from "./style"
@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <StyledHeader>
       <Logo src = { logo } alt = 'website logo' />
-      { location.pathname === 'home' &&  <MdExitToApp color = 'black' fontSize = '60px' />}
+      { location.pathname === '/home' &&  <MdExitToApp color="black" fontSize="30px" />}
     </StyledHeader>
   )
 }

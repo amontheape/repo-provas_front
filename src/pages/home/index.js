@@ -1,4 +1,5 @@
-import { Header } from '../../components'
+import { Header, SearchBar, Filters, TestsDisplay } from '../../components'
+import { HorizontalLine } from './style'
 
 export default function HomePage() {
   return (
@@ -6,8 +7,8 @@ export default function HomePage() {
       <Header />
       <SearchBar />
       <HorizontalLine />
-      <FiltersWrapper />
-      <CategoryContainer />
+      <Filters />
+      <TestsDisplay />
     </>
   )
 }

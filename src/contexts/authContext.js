@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import useLocalStorage from '../hooks/useLocalStorage'
 import { logout } from '../services/index.js'
@@ -7,6 +7,7 @@ export const AuthContext = createContext()
 
 export function AuthProvider( { children } ) {
   const [ user, setUser ] = useLocalStorage('user', null);
+  const [ filters, setFilters ] = useState('DISCIPLINAS')
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -34,7 +35,9 @@ export function AuthProvider( { children } ) {
         setUser,
         navigate,
         location,
-        handleLogout
+        handleLogout,
+        filters,
+        setFilters
       }}
     >
       { children }

@@ -8,8 +8,8 @@ export default function RegisterForm() {
   const { register, handleSubmit, getValues, formState : { errors } } = useForm()
   const { navigate } = useAuth()
 
-  function handleRegister( data ) {
-    registerUser( data )
+  function handleRegister( { email, password } ) {
+    registerUser( { email, password } )
      .then( navigate('/login') )
      .catch( err => {
        console.log( err )

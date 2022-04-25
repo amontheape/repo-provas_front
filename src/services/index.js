@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://lcoalhost:5000'
+const BASE_URL = 'http://localhost:5000'
 
 function createHeader( token ) {
   return { headers: { Authorization: `Bearer ${token}`} }
@@ -19,3 +19,12 @@ export async function logout( token ) {
   return await axios.post(`${BASE_URL}/sign-in`, {}, auth)
 }
 
+export async function getTestsByDiscipline( token ) {
+  const auth = createHeader( token )
+  return await axios.get(`${BASE_URL}/tests/disciplines`, auth)
+}
+
+export async function getTestsByTeacher( token ) {
+  const auth = createHeader( token )
+  return await axios.get(`${BASE_URL}/tests/teachers`, auth)
+}
