@@ -1,16 +1,16 @@
 import useAuth from "../../hooks/useAuth"
-import { MdExitToApp, MdHeight } from 'react-icons/md'
+import { MdExitToApp } from 'react-icons/md'
 import logo from '../../assets/images/logo.svg'
 
-import { StyledHeader, Logo } from "./style"
+import { StyledHeader, Logo, IconBox } from "./style"
 
 export default function Header() {
-  const { location } = useAuth()
+  const { location, handleLogout } = useAuth()
 
   return (
-    <StyledHeader>
+    <StyledHeader home = {location.pathname === '/home'}>
       <Logo src = { logo } alt = 'website logo' />
-      { location.pathname === '/home' &&  <MdExitToApp color="black" fontSize="30px" />}
+      { location.pathname === '/home' &&  <IconBox onClick = { () => handleLogout() } ><MdExitToApp color="black" fontSize="30px" /></IconBox>}
     </StyledHeader>
   )
 }

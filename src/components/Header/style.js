@@ -8,13 +8,21 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  padding: 55px calc((100% - 295px)/2);
+  padding: ${ ( { home } ) => home ? '' : '55px calc((100% - 295px)/2)'};
 `
 const Logo = styled.img`
   width: 295px;
 `
+const IconBox = styled.div`
+  height: 36px;
+  width: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 export {
   StyledHeader,
-  Logo
+  Logo,
+  IconBox
 }

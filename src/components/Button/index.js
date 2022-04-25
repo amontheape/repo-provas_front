@@ -6,9 +6,10 @@ export default function Button( { children } ) {
 
   function handleClick( value ) {
     if ( value !== 'ADICIONAR') setFilters(value)
+    else alert('Ainda não é possível adicionar provas')
   }
 
   return (
-    <StyledButton onClick = { e => handleClick(e.target.value)}>{ children }</StyledButton>
+    <StyledButton onClick = { () => handleClick(children)}>{ children }</StyledButton>
   )
 }

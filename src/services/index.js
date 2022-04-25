@@ -16,7 +16,7 @@ export async function registerUser( body ) {
 
 export async function logout( token ) {
   const auth = createHeader( token )
-  return await axios.post(`${BASE_URL}/sign-in`, {}, auth)
+  return await axios.post(`${BASE_URL}/sign-out`, {}, auth)
 }
 
 export async function getTestsByDiscipline( token ) {

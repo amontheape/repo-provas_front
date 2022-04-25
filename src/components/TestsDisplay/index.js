@@ -4,12 +4,12 @@ import useAuth from '../../hooks/useAuth'
 import { getTestsByDiscipline, getTestsByTeacher } from "../../services"
 
 export default function TestsDisplay() {
-  const { filters, user: { token } } = useAuth()
+  const { filters, user } = useAuth()
   const [ tests, setTests ] = useState([])
 
   function handleFilters() {
     if ( filters === 'DISCIPLINAS') {
-      getTestsByDiscipline( token )
+      getTestsByDiscipline( user?.token )
         .then( ( { data } ) => {
           setTests(data)
         })
@@ -17,7 +17,7 @@ export default function TestsDisplay() {
     }
 
     if ( filters === 'PESSOA INSTRUTORA') {
-      getTestsByTeacher( token )
+      getTestsByTeacher( user?.token )
         .then( ( { data } ) => {
           setTests(data)
         })
@@ -25,21 +25,21 @@ export default function TestsDisplay() {
     }
   }
 
-  useEffect( handleFilters, []) //eslint-disable-line
+  useEffect( handleFilters, [filters]) //eslint-disable-line
 
   return (
     <>
       { tests === []
           ? 'Loading tests'
           : filters === 'PESSOA INSTRUTORA'
-          ? tests.map( teacher => (
+          ? tests?.map( teacher => (
               <Accordion>
                 <AccordionPanel label={teacher.teacherName}>
-                  {teacher.tests.map( testType => (
+                  {teacher?.tests?.map( testType => (
                     <Accordion>
                       <AccordionPanel label={testType.name}>
-                        {testType.tests.map( testFinal => (
-                          <Box pad="medium" background="light">
+                        {testType?.tests?.map( testFinal => (
+                          <Box pad="small" background="light">
                             <Text>{`${testFinal.name} - ${testFinal.pdfUrl} (${testFinal.teacherDiscipline.discipline.name})`}</Text>
                           </Box>
                         ))}
@@ -49,16 +49,16 @@ export default function TestsDisplay() {
                 </AccordionPanel> 
               </Accordion>
             ))
-          : tests.map( term => (
+          : tests?.map( term => (
               <Accordion>
                 <AccordionPanel label={term.termName}>
-                  {term.disciplines.map( discipline => (
+                  {term?.disciplines?.map( discipline => (
                     <Accordion>
                       <AccordionPanel label={discipline.disciplineName}>
-                        {discipline.tests.map( test => (
+                        {discipline?.tests?.map( test => (
                           <Accordion>
                             <AccordionPanel label={test.name}>
-                              {test.tests.map( final => (
+                              {test?.tests?.map( final => (
                                 <Box pad="small" background="light">
                                   <Text>{`${final.name} - ${final.pdfUrl} (${final.teacherDiscipline.teacher.name})`}</Text>
                                 </Box>
